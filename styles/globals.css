@@ -1,0 +1,43 @@
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradient 15s linear infinite;
+  transition: all 0.5s ease;
+}
+
+/* Optional: Add hover effect */
+.animate-gradient:hover {
+  background-size: 150% auto;
+  filter: brightness(1.1);
+}
+
+/* Add subtle glow effect */
+@keyframes glow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.1); }
+}
+
+.glow-effect {
+  animation: glow 3s ease-in-out infinite;
+}
+
+/* Smooth transition for hover effects */
+.group:hover .group-hover\:animate-shine {
+  animation: shine 1.5s ease-in-out;
+}
+
+/* Custom transition curve */
+.transition-custom {
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+} 
