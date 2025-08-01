@@ -1,152 +1,125 @@
-# Modern Next.js Enterprise Application Template
+A comprehensive project management platform designed for software development agencies and enterprise clients. Built with modern web technologies, AffinityX provides a complete solution for managing software development projects, client relationships, and team collaboration.
 
-A cutting-edge, enterprise-ready Next.js 14 template featuring a stunning glass-morphism design, AI integration capabilities, and a comprehensive suite of modern web development tools.
 
 [![Affinity-X.jpg](https://i.postimg.cc/gk98hTW5/Affinity-X.jpg)](https://postimg.cc/7bV58XbM)
+# AffinityX
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Next.js](https://img.shields.io/badge/Next.js-14-black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
-![Tailwind](https://img.shields.io/badge/Tailwind_CSS-3.0-38bdf8)
 
-## Key Features
+## Overview
 
-- 🎨 Modern Glass-Morphism UI - Stunning frosted glass effects and modern design patterns
-- 🔐 Authentication Ready - Integrated with Clerk for secure user management
-- 🌙 Dark/Light Mode - Seamless theme switching with system preference support
-- 🎭 Role-Based Access - Enterprise-grade permission system
-- 🤖 AI Integration Ready - Pre-configured AI tools and components
-- 📱 Responsive Design - Mobile-first approach with elegant animations
-- 🔍 SEO Optimized - Built-in SEO best practices
-- 🚀 Performance Focused - Optimized for Core Web Vitals
+AffinityX is a full-stack web application that serves as both a client-facing project management portal and an internal agency management system. The platform enables software development agencies to efficiently manage multiple client projects while providing clients with real-time visibility into their project progress.
 
-## Tech Stack
+## Core Features
 
-- Framework: Next.js 14 with App Router
-- Language: TypeScript
-- Styling: Tailwind CSS + Shadcn/ui
-- Authentication: Clerk
-- State Management: Zustand
-- Database: Prisma (ready to configure)
-- Animations: Framer Motion
-- Icons: Lucide Icons
-- Form Handling: React Hook Form
-- Validation: Zod
-- API: tRPC (ready to implement)
+### Client Portal
+- **Project Dashboard**: Real-time project status and progress tracking
+- **Request Management**: Submit and track feature requests and bug reports
+- **Task Overview**: View assigned tasks and deadlines
+- **Communication Hub**: Direct messaging with project teams
+- **Analytics**: Project performance metrics and insights
+
+### Admin Portal
+- **Project Management**: Create, assign, and monitor project progress
+- **Team Management**: Assign team members to projects and tasks
+- **Client Management**: Manage client accounts and permissions
+- **Analytics Dashboard**: Comprehensive business metrics and reporting
+- **Resource Allocation**: Track time, budget, and resource utilization
+
+### Project Management
+- **Multi-Project Support**: Manage multiple concurrent projects
+- **Task Tracking**: Detailed task management with priorities and deadlines
+- **Milestone Management**: Set and track project milestones
+- **File Management**: Secure file sharing and document management
+- **Comment System**: Project-specific communication threads
+
+## Technical Architecture
+
+### Frontend
+- **Next.js 15**: React framework with App Router
+- **TypeScript**: Type-safe development
+- **Tailwind CSS**: Utility-first styling
+- **Framer Motion**: Advanced animations and transitions
+- **Radix UI**: Accessible component primitives
+- **Shadcn/ui**: Modern component library
+
+### Backend
+- **Next.js API Routes**: Server-side API endpoints
+- **Drizzle ORM**: Type-safe database operations
+- **PostgreSQL**: Primary database (Neon serverless)
+- **Auth0**: Enterprise-grade authentication
+
+### Database Schema
+- **Users**: Client and admin user management
+- **Projects**: Project metadata and status tracking
+- **Tasks**: Task assignment and progress tracking
+- **Comments**: Project communication system
+- **Files**: Document and asset management
+- **Milestones**: Project milestone tracking
+
+### Key Technologies
+- **Neon Database**: Serverless PostgreSQL for scalability
+- **Auth0**: Secure authentication and authorization
+- **Vercel**: Deployment and hosting platform
+- **Stripe**: Payment processing integration
+- **AI SDK**: Integration with multiple AI providers
 
 ## Project Structure
 
 ```
-├── app/                   # Next.js app router pages
-├── components/           
-│   ├── ui/               # Reusable UI components
-│   ├── wrapper/          # Layout wrapper components
-│   └── homepage/         # Homepage-specific components
-├── lib/                  # Utility functions and configurations
-├── hooks/                # Custom React hooks
-├── styles/               # Global styles and Tailwind config
-├── types/                # TypeScript type definitions
-└── public/               # Static assets
+app/
+├── admin/           # Admin portal pages
+├── client/          # Client portal pages
+├── dashboard/       # Main dashboard components
+├── api/            # API route handlers
+├── auth/           # Authentication pages
+├── analytics/      # Analytics and reporting
+├── projects/       # Project management
+├── tasks/          # Task management
+├── messages/       # Communication system
+└── calendar/       # Scheduling and events
 ```
 
-## Getting Started
+## Development Status
 
-1. Clone the repository
-```
-git clone https://github.com/yourusername/your-repo-name.git
-```
+The application is currently in active development with the following status:
 
-2. Install dependencies
-```
-pnpm install
-```
+- **Core Infrastructure**: Complete
+- **Authentication System**: Implemented with Auth0
+- **Database Schema**: Fully defined and migrated
+- **Client Portal**: Functional with mock data
+- **Admin Portal**: Functional with mock data
+- **API Endpoints**: Implemented with mock responses
+- **UI Components**: Complete component library
+- **Production Build**: Ready for deployment
 
-3. Set up environment variables
-```
-cp .env.example .env.local
-```
+## Environment Setup
 
-4. Start the development server
-```
-pnpm dev
-```
+The application requires the following environment variables:
 
-## Core Components
-
-### Glass-Morphism Navigation
-- Modern frosted glass effect
-- Smooth hover states
-- Responsive dropdown menus
-- Animated transitions
-
-### Design System
-- Consistent color palette
-- Typography scale
-- Spacing system
-- Component variants
-
-### Security Features
-- CSRF protection
-- XSS prevention
-- Rate limiting
-- Secure headers
-
-## Documentation
-
-Detailed documentation is available in the /docs directory:
-- [Component Guide](docs/components.md)
-- [Authentication](docs/auth.md)
-- [API Reference](docs/api.md)
-- [Deployment Guide](docs/deployment.md)
-
-## Configuration
-
-### Environment Variables
-```
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
-```
+- `DATABASE_URL`: Neon PostgreSQL connection string
+- `AUTH0_SECRET`: Auth0 application secret
+- `AUTH0_BASE_URL`: Application base URL
+- `AUTH0_ISSUER_BASE_URL`: Auth0 domain
+- `AUTH0_CLIENT_ID`: Auth0 client identifier
+- `AUTH0_CLIENT_SECRET`: Auth0 client secret
 
 ## Deployment
 
-This project is optimized for deployment on Vercel:
+The application is configured for deployment on Vercel with the following features:
 
-```
-vercel deploy
-```
+- **Automatic Builds**: CI/CD pipeline integration
+- **Environment Management**: Staging and production environments
+- **Database Migrations**: Automated schema updates
+- **Performance Optimization**: Next.js optimization features
 
-## Contributing
+## Business Model
 
-Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
+AffinityX is designed to serve software development agencies by providing:
 
-1. Fork the repository
-2. Create your feature branch (git checkout -b feature/AmazingFeature)
-3. Commit your changes (git commit -m 'Add some AmazingFeature')
-4. Push to the branch (git push origin feature/AmazingFeature)
-5. Open a Pull Request
+- **Client Transparency**: Real-time project visibility for clients
+- **Operational Efficiency**: Streamlined project management workflows
+- **Professional Presentation**: Enterprise-grade client portal
+- **Scalable Architecture**: Support for multiple clients and projects
+- **Revenue Tracking**: Integrated billing and payment processing
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- [Next.js Team](https://nextjs.org/)
-- [Vercel](https://vercel.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Shadcn/ui](https://ui.shadcn.com/)
-- [Clerk](https://clerk.dev/)
-
-## Support
-
-For support, email hello@theaffinitylabs.com
-
----
-
-<p align="center">
-  Made with ❤️ by sshssn @TheAffinityLabs
-</p>
+This platform enables agencies to deliver professional project management experiences while maintaining operational efficiency and client satisfaction.
