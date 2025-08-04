@@ -32,10 +32,20 @@ const GlowingEffect = memo(({
   const containerRef = useRef<HTMLDivElement>(null);
   const lastPosition = useRef({ x: 0, y: 0 });
   const animationFrameRef = useRef<number>(0);
+  const throttleRef = useRef<number>(0);
 
   const handleMove = useCallback(
     (e?: MouseEvent | { x: number; y: number }) => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || disabled) return;
+
+      // Throttle to 60fps max
+      if (throttleRef.current) {
+        return;
+      }
+
+      throttleRef.current = requestAnimationFrame(() => {
+        throttleRef.current = 0;
+      });
 
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
@@ -83,25 +93,40 @@ const GlowingEffect = memo(({
           90;
 
         const angleDiff = ((targetAngle - currentAngle + 180) % 360) - 180;
-        const newAngle = currentAngle + angleDiff;
+        
+        // Only animate if the difference is significant
+        if (Math.abs(angleDiff) > 5) {
+          const newAngle = currentAngle + angleDiff;
 
-        animate(currentAngle, newAngle, {
-          duration: movementDuration,
-          ease: [0.16, 1, 0.3, 1],
-          onUpdate: (value) => {
-            element.style.setProperty("--start", String(value));
-          },
-        });
+          animate(currentAngle, newAngle, {
+            duration: movementDuration,
+            ease: [0.16, 1, 0.3, 1],
+            onUpdate: (value) => {
+              element.style.setProperty("--start", String(value));
+            },
+          });
+        }
       });
     },
-    [inactiveZone, proximity, movementDuration]
+    [inactiveZone, proximity, movementDuration, disabled]
   );
 
   useEffect(() => {
     if (disabled) return;
 
-    const handleScroll = () => handleMove();
-    const handlePointerMove = (e: PointerEvent) => handleMove(e);
+    let timeoutId: NodeJS.Timeout;
+    
+    const handleScroll = () => {
+      // Debounce scroll events
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => handleMove(), 16); // ~60fps
+    };
+    
+    const handlePointerMove = (e: PointerEvent) => {
+      // Throttle pointer events
+      if (throttleRef.current) return;
+      handleMove(e);
+    };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     document.body.addEventListener("pointermove", handlePointerMove, {
@@ -109,8 +134,12 @@ const GlowingEffect = memo(({
     });
 
     return () => {
+      clearTimeout(timeoutId);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
+      }
+      if (throttleRef.current) {
+        cancelAnimationFrame(throttleRef.current);
       }
       window.removeEventListener("scroll", handleScroll);
       document.body.removeEventListener("pointermove", handlePointerMove);

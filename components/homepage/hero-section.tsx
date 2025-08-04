@@ -15,7 +15,7 @@ export default function HomeHeroSection() {
         ctaText="Start Your Project"
         ctaHref="/auth"
         video={{
-          src: "/hero.mp4",
+          src: "https://qtfqnnn273yjwrvd.public.blob.vercel-storage.com/hero.mp4",
           poster: "/placeholder.jpg",
         }}
         gridOptions={{

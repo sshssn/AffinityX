@@ -23,16 +23,19 @@ export function TechStackSection() {
   if (!mounted) {
     return (
       <div className="relative rounded-2xl">
-        <GlowingEffect
-          spread={40}
-          glow={true}
-          disabled={false}
-          proximity={64}
-          inactiveZone={0.01}
-          borderWidth={2}
-        />
-        <div className="container mx-auto max-w-4xl relative z-10">
-          <div className="text-center mb-16">
+        {/* Only show GlowingEffect on desktop */}
+        <div className="hidden lg:block">
+          <GlowingEffect
+            spread={40}
+            glow={true}
+            disabled={false}
+            proximity={64}
+            inactiveZone={0.01}
+            borderWidth={2}
+          />
+        </div>
+        <div className="container mx-auto max-w-4xl relative z-10 px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -41,7 +44,7 @@ export function TechStackSection() {
                 ease: [0.2, 0.65, 0.3, 0.9],
               }}
               viewport={{ once: true }}
-              className="font-geist text-4xl md:text-5xl font-light mb-6 tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-indigo-600 to-gray-900 dark:from-white dark:via-indigo-300 dark:to-white"
+              className="font-geist text-3xl sm:text-4xl md:text-5xl font-light mb-4 sm:mb-6 tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-indigo-600 to-gray-900 dark:from-white dark:via-indigo-300 dark:to-white px-2"
             >
               Powered by Innovation.
             </motion.h2>
@@ -54,7 +57,7 @@ export function TechStackSection() {
                 ease: [0.2, 0.65, 0.3, 0.9],
               }}
               viewport={{ once: true }}
-              className="text-lg font-geist text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+              className="text-base sm:text-lg font-geist text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-4"
             >
               Leveraging industry-leading technologies to deliver scalable, high-performance solutions. Built with security and user experience at its core.
             </motion.p>
@@ -222,16 +225,19 @@ export function TechStackSection() {
 
   return (
     <div className="relative rounded-2xl">
-      <GlowingEffect
-        spread={40}
-        glow={true}
-        disabled={false}
-        proximity={64}
-        inactiveZone={0.01}
-        borderWidth={2}
-      />
-      <div className="container mx-auto max-w-4xl relative z-10">
-        <div className="text-center mb-16">
+      {/* Only show GlowingEffect on desktop */}
+      <div className="hidden lg:block">
+        <GlowingEffect
+          spread={40}
+          glow={true}
+          disabled={false}
+          proximity={64}
+          inactiveZone={0.01}
+          borderWidth={2}
+        />
+      </div>
+      <div className="container mx-auto max-w-4xl relative z-10 px-4 sm:px-6">
+        <div className="text-center mb-12 sm:mb-16">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -240,7 +246,7 @@ export function TechStackSection() {
               ease: [0.2, 0.65, 0.3, 0.9],
             }}
             viewport={{ once: true }}
-            className="font-geist text-4xl md:text-5xl font-light mb-6 tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-indigo-600 to-gray-900 dark:from-white dark:via-indigo-300 dark:to-white"
+            className="font-geist text-3xl sm:text-4xl md:text-5xl font-light mb-4 sm:mb-6 tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-indigo-600 to-gray-900 dark:from-white dark:via-indigo-300 dark:to-white px-2"
           >
             Powered by Innovation.
           </motion.h2>
@@ -253,13 +259,13 @@ export function TechStackSection() {
               ease: [0.2, 0.65, 0.3, 0.9],
             }}
             viewport={{ once: true }}
-            className="text-lg font-geist text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg font-geist text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed px-4"
           >
-                          Our technology stack is carefully curated to deliver exceptional results. We don&apos;t just use the latest tools—we master them to create solutions that give your business a competitive edge. From lightning-fast web applications to intelligent mobile experiences, every technology choice is made with your success in mind.
+            Our technology stack is carefully curated to deliver exceptional results. We don&apos;t just use the latest tools—we master them to create solutions that give your business a competitive edge. From lightning-fast web applications to intelligent mobile experiences, every technology choice is made with your success in mind.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {techStack.map((item, i) => (
             <motion.div
               key={i}
@@ -273,7 +279,7 @@ export function TechStackSection() {
                 "bg-white/[0.7] dark:bg-neutral-900/[0.7]",
                 "border border-neutral-200 dark:border-neutral-800",
                 "backdrop-blur-xl backdrop-saturate-150",
-                "p-6",
+                "p-4 sm:p-6",
                 item.className
               )}
             >
@@ -281,15 +287,15 @@ export function TechStackSection() {
                 "absolute inset-0 bg-gradient-to-br opacity-20",
                 item.gradient
               )} />
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-2 w-16 h-16 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
+              <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                <div className="p-2 w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
                   {item.icon}
                 </div>
                 <div>
-                  <div className="font-mono text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                  <div className="font-mono text-xs sm:text-sm font-medium text-neutral-600 dark:text-neutral-400">
                     {item.header}
                   </div>
-                  <div className="font-geist text-xl font-bold text-neutral-900 dark:text-neutral-100">
+                  <div className="font-geist text-lg sm:text-xl font-bold text-neutral-900 dark:text-neutral-100">
                     {item.title}
                   </div>
                 </div>

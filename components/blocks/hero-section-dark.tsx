@@ -77,61 +77,76 @@ const HeroSection = React.forwardRef<HTMLDivElement, HeroSectionProps>(
         
         <div className="absolute inset-0 dark:bg-grid-white/[0.05] bg-grid-black/[0.05] pointer-events-none" />
         
-        <section className="relative w-full flex flex-col justify-center flex-1 py-16 sm:py-20">
+        <section className="relative w-full flex flex-col justify-center flex-1 py-8 sm:py-12 md:py-16 lg:py-20">
           <RetroGrid {...gridOptions} />
           
           <div className="max-w-screen-xl mx-auto w-full px-4 sm:px-6 lg:px-8 z-10">
-            <div className="space-y-6 sm:space-y-8 max-w-3xl mx-auto text-center">
-              <h1 className="text-[0.8em] sm:text-sm text-transparent bg-clip-text bg-gradient-to-r from-gray-600 via-indigo-500 to-gray-600 dark:from-gray-400 dark:via-indigo-300 dark:to-gray-400 group mx-auto px-4 py-2 mt-3 bg-gradient-to-tr from-zinc-300/20 via-gray-400/20 to-transparent dark:from-zinc-300/5 dark:via-gray-400/5 border-[2px] border-black/5 dark:border-white/5 rounded-3xl w-fit">
+            <div className="space-y-4 sm:space-y-6 md:space-y-8 max-w-3xl mx-auto text-center">
+              <h1 className="text-xs sm:text-sm text-transparent bg-clip-text bg-gradient-to-r from-gray-600 via-indigo-500 to-gray-600 dark:from-gray-400 dark:via-indigo-300 dark:to-gray-400 group mx-auto px-3 sm:px-4 py-1.5 sm:py-2 mt-3 bg-gradient-to-tr from-zinc-300/20 via-gray-400/20 to-transparent dark:from-zinc-300/5 dark:via-gray-400/5 border-[1.5px] sm:border-[2px] border-black/5 dark:border-white/5 rounded-2xl sm:rounded-3xl w-fit">
                 {title}
-                <ChevronRight className="inline w-4 h-4 ml-2 group-hover:translate-x-1 duration-300" />
+                <ChevronRight className="inline w-3 h-3 sm:w-4 sm:h-4 ml-1.5 sm:ml-2 group-hover:translate-x-1 duration-300" />
               </h1>
 
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tighter font-geist bg-clip-text text-transparent mx-auto leading-[1.2] bg-[linear-gradient(180deg,_#000_0%,_rgba(0,_0,_0,_0.75)_100%)] dark:bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)]">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-tighter font-geist bg-clip-text text-transparent mx-auto leading-[1.1] sm:leading-[1.2] bg-[linear-gradient(180deg,_#000_0%,_rgba(0,_0,_0,_0.75)_100%)] dark:bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] px-2">
                 {subtitle?.regular}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 dark:from-purple-300 dark:to-orange-200">
                   {subtitle?.gradient}
                 </span>
               </h2>
 
-              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-4">
+              <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-4 leading-relaxed">
                 {description}
               </p>
             </div>
 
-            <div className="relative w-full max-w-5xl mx-auto mt-8 aspect-[16/9] rounded-xl overflow-hidden">
-              <GlowingEffect
-                spread={80}
-                glow={true}
-                disabled={false}
-                proximity={100}
-                inactiveZone={0.01}
-                borderWidth={2}
-              />
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                poster={video.poster}
-                className="w-full h-full object-cover rounded-xl relative z-10"
-              >
-                <source src={video.src} type="video/mp4" />
-                <img
-                  src={video.poster}
-                  alt="Hero section video fallback"
-                  className="w-full h-full object-cover"
-                />
-              </video>
+            {/* Edge-to-edge video container with rounded corners */}
+            <div className="relative w-full max-w-6xl mx-auto mt-6 sm:mt-8 -mx-4 sm:-mx-6 lg:-mx-8">
+              <div className="relative aspect-[16/9] sm:aspect-[16/9] md:aspect-[16/9] lg:aspect-[16/9] xl:aspect-[16/9] overflow-hidden">
+                {/* Only show GlowingEffect on desktop for better performance */}
+                <div className="hidden lg:block">
+                  <GlowingEffect
+                    spread={40}
+                    glow={true}
+                    disabled={false}
+                    proximity={60}
+                    inactiveZone={0.01}
+                    borderWidth={1.5}
+                  />
+                </div>
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  poster={video.poster}
+                  className="w-full h-full object-cover relative z-10"
+                  preload="metadata"
+                >
+                  <source src={video.src} type="video/mp4" />
+                  <img
+                    src={video.poster}
+                    alt="Hero section video fallback"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </video>
+                {/* Rounded corners overlay for mobile */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="absolute top-0 left-0 w-4 h-4 bg-white dark:bg-black rounded-br-xl sm:rounded-br-2xl"></div>
+                  <div className="absolute top-0 right-0 w-4 h-4 bg-white dark:bg-black rounded-bl-xl sm:rounded-bl-2xl"></div>
+                  <div className="absolute bottom-0 left-0 w-4 h-4 bg-white dark:bg-black rounded-tr-xl sm:rounded-tr-2xl"></div>
+                  <div className="absolute bottom-0 right-0 w-4 h-4 bg-white dark:bg-black rounded-tl-xl sm:rounded-tl-2xl"></div>
+                </div>
+              </div>
             </div>
 
-            <div className="flex justify-center mt-8">
-              <span className="relative inline-block overflow-hidden rounded-full p-[1.5px]">
+            <div className="flex justify-center mt-6 sm:mt-8">
+              <span className="relative inline-block overflow-hidden rounded-full p-[1px] sm:p-[1.5px]">
                 <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-                <div className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-white dark:bg-gray-950 text-sm font-medium backdrop-blur-3xl">
+                <div className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-white dark:bg-gray-950 text-xs sm:text-sm font-medium backdrop-blur-3xl">
                   <a
                     href={ctaHref}
-                    className="inline-flex rounded-full text-center group items-center justify-center bg-gradient-to-tr from-zinc-300/20 via-purple-400/30 to-transparent dark:from-zinc-300/5 dark:via-purple-400/20 text-gray-900 dark:text-white border-input border-[1px] hover:bg-gradient-to-tr hover:from-zinc-300/30 hover:via-purple-400/40 hover:to-transparent dark:hover:from-zinc-300/10 dark:hover:via-purple-400/30 transition-all py-4 px-6 sm:px-10"
+                    className="inline-flex rounded-full text-center group items-center justify-center bg-gradient-to-tr from-zinc-300/20 via-purple-400/30 to-transparent dark:from-zinc-300/5 dark:via-purple-400/20 text-gray-900 dark:text-white border-input border-[1px] hover:bg-gradient-to-tr hover:from-zinc-300/30 hover:via-purple-400/40 hover:to-transparent dark:hover:from-zinc-300/10 dark:hover:via-purple-400/30 transition-all py-3 px-4 sm:py-4 sm:px-6 md:px-10"
                   >
                     {ctaText}
                   </a>

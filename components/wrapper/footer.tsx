@@ -11,7 +11,7 @@ export default function Footer() {
             {/* Page-end separator */}
             <div className="w-full h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
             
-            <footer className="relative overflow-hidden bg-white dark:bg-black min-h-[160px] flex items-center justify-center">
+            <footer className="relative overflow-hidden bg-white dark:bg-black min-h-[120px] sm:min-h-[160px] flex items-center justify-center py-8 sm:py-12">
                 {/* Retro grid background */}
                 <RetroGrid 
                     className="dark:opacity-40 opacity-25" 
@@ -25,14 +25,14 @@ export default function Footer() {
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-white to-white/0 dark:from-black dark:to-black/0" />
 
-                <div className="relative z-30 w-full">
-                    <div className="flex flex-col items-center gap-4">
+                <div className="relative z-30 w-full px-4 sm:px-6">
+                    <div className="flex flex-col items-center gap-3 sm:gap-4">
                         {/* Essential Links */}
-                        <div className="flex flex-wrap justify-center items-center gap-4 text-xs text-gray-600 dark:text-gray-400">
-                            <Link href="/about" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">About</Link>
-                            <Link href="/contact" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Contact</Link>
-                            <Link href="/privacy" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Privacy</Link>
-                            <Link href="/terms" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Terms</Link>
+                        <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                            <Link href="/about" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors px-1">About</Link>
+                            <Link href="/contact" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors px-1">Contact</Link>
+                            <Link href="/privacy" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors px-1">Privacy</Link>
+                            <Link href="/terms" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors px-1">Terms</Link>
                         </div>
 
                         {/* Copyright */}
@@ -42,12 +42,12 @@ export default function Footer() {
                                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-pink-500/20 to-purple-500/20 rounded-lg animate-glow-slow-delayed"></div>
                             </div>
 
-                            <div className="frost-glass-card relative px-3 py-1.5 rounded-lg backdrop-blur-xl">
-                                <div className="flex items-center justify-center gap-2 text-xs font-geist">
+                            <div className="frost-glass-card relative px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg backdrop-blur-xl">
+                                <div className="flex items-center justify-center gap-1.5 sm:gap-2 text-xs font-geist">
                                     <span className="text-gray-600 dark:text-gray-300">
                                         <span className="font-medium">©</span> {new Date().getFullYear()}
                                     </span>
-                                    <div className="h-3 w-[1px] bg-gradient-to-b from-purple-500/30 via-blue-500/30 to-pink-500/30" />
+                                    <div className="h-2.5 sm:h-3 w-[1px] bg-gradient-to-b from-purple-500/30 via-blue-500/30 to-pink-500/30" />
                                     <div className="flex items-center">
                                         <span className="text-gray-600 dark:text-gray-300">
                                             AffinityX<sup className="text-[0.5rem] font-medium ml-0.5">TM</sup>

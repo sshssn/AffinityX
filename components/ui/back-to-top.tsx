@@ -1,168 +1,62 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUp, Check } from "lucide-react";
+import { ChevronUp } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function BackToTop() {
-  const [show, setShow] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [isComplete, setIsComplete] = useState(false);
-  const [showCheck, setShowCheck] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Show button after 400px
-      if (window.scrollY > 400) {
-        setShow(true);
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
       } else {
-        setShow(false);
-      }
-
-      // Calculate scroll progress
-      const winScroll = document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      setScrollProgress(scrolled);
-
-      // Handle completion state
-      if (scrolled > 98) {
-        setIsComplete(true);
-        setShowCheck(true);
-        setTimeout(() => setShowCheck(false), 1500); // Reset to arrow after 1.5s
-      } else {
-        setIsComplete(false);
-        setShowCheck(false);
+        setIsVisible(false);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
-  // Confetti particles
-  const particles = Array.from({ length: 8 }).map((_, i) => ({
-    rotate: (360 / 8) * i,
-    x: Math.cos((2 * Math.PI * i) / 8) * 20,
-    y: Math.sin((2 * Math.PI * i) / 8) * 20,
-  }));
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <AnimatePresence>
-      {show && (
+      {isVisible && (
         <motion.button
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-8 right-8 z-50 p-3 rounded-full 
-            bg-white dark:bg-neutral-900 shadow-lg dark:shadow-indigo-500/20
-            border border-neutral-200 dark:border-neutral-800
-            backdrop-blur-sm backdrop-saturate-150
-            hover:shadow-xl hover:scale-110
-            transition-all duration-300 ease-out
-            group"
+          initial={{ opacity: 0, scale: 0.8, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.8, y: 20 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          onClick={scrollToTop}
+          className={cn(
+            "fixed bottom-6 right-6 z-50",
+            "w-12 h-12 rounded-full",
+            "bg-white/20 dark:bg-black/20 backdrop-blur-md",
+            "border border-white/20 dark:border-white/10",
+            "shadow-lg hover:shadow-xl",
+            "transition-all duration-300",
+            "hover:bg-white/30 dark:hover:bg-black/30",
+            "hover:scale-110 active:scale-95",
+            "flex items-center justify-center",
+            "group"
+          )}
+          aria-label="Back to top"
         >
-          <div className="relative">
-            {/* Progress Circle */}
-            <svg
-              className="w-8 h-8 transform -rotate-90"
-              viewBox="0 0 32 32"
-            >
-              <motion.circle
-                className="stroke-current text-neutral-200 dark:text-neutral-800"
-                fill="none"
-                strokeWidth="2"
-                cx="16"
-                cy="16"
-                r="14"
-              />
-              <motion.circle
-                className="stroke-current text-indigo-500 dark:text-indigo-400"
-                fill="none"
-                strokeWidth="2"
-                strokeLinecap="round"
-                cx="16"
-                cy="16"
-                r="14"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: scrollProgress / 100 }}
-                style={{
-                  filter: "drop-shadow(0 0 2px rgba(99, 102, 241, 0.4))"
-                }}
-                transition={{
-                  duration: 0.2,
-                  ease: "easeOut"
-                }}
-              />
-            </svg>
-
-            {/* Confetti Effect */}
-            <AnimatePresence>
-              {isComplete && (
-                <>
-                  {particles.map((particle, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ scale: 0, opacity: 1 }}
-                      animate={{
-                        scale: 1,
-                        opacity: 0,
-                        x: particle.x,
-                        y: particle.y,
-                        rotate: particle.rotate
-                      }}
-                      exit={{ scale: 0, opacity: 0 }}
-                      transition={{
-                        duration: 0.6,
-                        ease: "easeOut"
-                      }}
-                      className="absolute top-1/2 left-1/2 w-1 h-3 bg-gradient-to-r from-indigo-500 to-indigo-300 rounded-full"
-                      style={{
-                        transformOrigin: "center"
-                      }}
-                    />
-                  ))}
-                </>
-              )}
-            </AnimatePresence>
-
-            {/* Icon */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <AnimatePresence mode="wait">
-                {showCheck ? (
-                  <motion.div
-                    key="check"
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Check className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="arrow"
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <ArrowUp className="w-4 h-4 text-neutral-600 dark:text-neutral-300 
-                      group-hover:text-indigo-600 dark:group-hover:text-indigo-400
-                      transition-colors duration-200" 
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Glow effect */}
-            <div className="absolute inset-0 bg-indigo-500/20 dark:bg-indigo-400/20 
-              rounded-full blur-xl scale-150 opacity-0 
-              group-hover:opacity-100 transition-opacity duration-300" 
-            />
-          </div>
+          <motion.div
+            animate={{ y: [0, -2, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ChevronUp className="w-5 h-5 text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors" />
+          </motion.div>
         </motion.button>
       )}
     </AnimatePresence>

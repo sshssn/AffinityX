@@ -39,24 +39,24 @@ const faqs = [
 
 export function FAQSection() {
     return (
-        <section className="py-24 relative overflow-hidden">
+        <section className="py-16 sm:py-20 md:py-24 relative overflow-hidden">
             {/* Frosted glass container with gradient background */}
             <div className="absolute inset-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-100/30 via-blue-100/30 to-teal-100/30 dark:from-purple-900/30 dark:via-blue-900/30 dark:to-teal-900/30" />
                 <div className="absolute inset-0 backdrop-blur-[100px]" />
             </div>
 
-            <div className="container mx-auto px-4 relative z-10">
+            <div className="container mx-auto px-4 sm:px-6 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.2 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="text-center mb-12 sm:mb-16"
                 >
-                    <div className="mx-auto w-fit rounded-full bg-white/20 dark:bg-white/10 backdrop-blur-sm px-4 py-1.5 mb-8">
-                        <div className="flex items-center gap-2 text-sm font-geist font-medium text-indigo-600 dark:text-indigo-400">
-                            <HelpCircle className="h-4 w-4" />
+                    <div className="mx-auto w-fit rounded-full bg-white/20 dark:bg-white/10 backdrop-blur-sm px-3 sm:px-4 py-1 sm:py-1.5 mb-6 sm:mb-8">
+                        <div className="flex items-center gap-2 text-xs sm:text-sm font-geist font-medium text-indigo-600 dark:text-indigo-400">
+                            <HelpCircle className="h-3 w-3 sm:h-4 sm:w-4" />
                             <span>FAQ</span>
                         </div>
                     </div>
@@ -66,7 +66,7 @@ export function FAQSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
                         viewport={{ once: true }}
-                        className="font-geist text-4xl md:text-5xl font-light mb-6 tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-indigo-600 to-gray-900 dark:from-white dark:via-indigo-300 dark:to-white"
+                        className="font-geist text-3xl sm:text-4xl md:text-5xl font-light mb-4 sm:mb-6 tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-indigo-600 to-gray-900 dark:from-white dark:via-indigo-300 dark:to-white px-2"
                     >
                         Common Questions.
                     </motion.h2>
@@ -75,40 +75,43 @@ export function FAQSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         viewport={{ once: true }}
-                        className="text-lg font-geist text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+                        className="text-base sm:text-lg font-geist text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-4"
                     >
                         Discover how TheAffinityLabs can transform your business through innovative technology solutions
                     </motion.p>
                 </motion.div>
 
-                <div className="max-w-3xl mx-auto backdrop-blur-md bg-white/40 dark:bg-black/40 rounded-3xl p-6 border border-white/20 dark:border-white/10">
+                <div className="max-w-3xl mx-auto backdrop-blur-md bg-white/40 dark:bg-black/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-white/20 dark:border-white/10">
                     <Accordion type="single" collapsible className="w-full">
                         {faqs.map((item, index) => (
                             <motion.div
                                 key={index}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: index * 0.2 }}
+                                transition={{ duration: 0.8, delay: index * 0.1 }}
                                 viewport={{ once: true }}
                             >
                                 <AccordionItem 
                                     value={`item-${index}`} 
-                                    className="relative bg-white/30 dark:bg-black/30 my-4 rounded-xl border-none overflow-hidden"
+                                    className="relative bg-white/30 dark:bg-black/30 my-3 sm:my-4 rounded-xl border-none overflow-hidden"
                                 >
-                                    <GlowingEffect
-                                        spread={40}
-                                        glow={true}
-                                        disabled={false}
-                                        proximity={64}
-                                        inactiveZone={0.01}
-                                        borderWidth={2}
-                                    />
-                                    <AccordionTrigger className="px-6 py-4 text-lg font-geist font-medium text-gray-900 dark:text-white hover:no-underline group">
-                                        <span className="group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
+                                    {/* Only show GlowingEffect on desktop for better performance */}
+                                    <div className="hidden lg:block">
+                                        <GlowingEffect
+                                            spread={40}
+                                            glow={true}
+                                            disabled={false}
+                                            proximity={64}
+                                            inactiveZone={0.01}
+                                            borderWidth={2}
+                                        />
+                                    </div>
+                                    <AccordionTrigger className="px-4 sm:px-6 py-3 sm:py-4 text-base sm:text-lg font-geist font-medium text-gray-900 dark:text-white hover:no-underline group">
+                                        <span className="group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300 text-left">
                                             {item.question}
                                         </span>
                                     </AccordionTrigger>
-                                    <AccordionContent className="px-6 pb-4 font-geist text-gray-600 dark:text-gray-300">
+                                    <AccordionContent className="px-4 sm:px-6 pb-3 sm:pb-4 font-geist text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
                                         {item.answer}
                                     </AccordionContent>
                                 </AccordionItem>

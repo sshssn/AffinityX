@@ -105,7 +105,7 @@ export default function NavBar() {
     return (
       <div className="relative w-32 h-8">
         <Image
-          src={theme === 'dark' ? '/light.png' : '/dark.png'}
+          src={theme === 'dark' ? '/dark.png' : '/light.png'}
           alt="Affinity Labs Logo"
           fill
           className="object-contain"
@@ -126,15 +126,15 @@ export default function NavBar() {
         className={cn(
           "transition-all duration-500 ease-in-out backdrop-blur-md",
           isScrolled 
-            ? "w-[101%] sm:w-[750px] m-4 rounded-xl bg-white/10 dark:bg-black/10 shadow-lg border border-white/20 dark:border-white/[0.08]"
-            : "w-full max-w-7xl bg-white/[0.02] dark:bg-black/[0.02] border-[0.5px] border-white/[0.05] dark:border-white/[0.02]"
+            ? "w-[101%] sm:w-[750px] m-4 rounded-xl bg-white/20 dark:bg-black/20 shadow-lg border border-white/20 dark:border-white/[0.08]"
+            : "w-full max-w-7xl bg-white/[0.05] dark:bg-black/[0.05] border-[0.5px] border-white/[0.05] dark:border-white/[0.02]"
         )}
       >
         <div 
           className={cn(
             "flex items-center justify-between h-16 px-4 sm:px-6 backdrop-blur-md transition-all duration-500 text-gray-800 dark:text-gray-200",
             isScrolled
-              ? "bg-white/20 dark:bg-black/20 rounded-xl"
+              ? "bg-white/30 dark:bg-black/30 rounded-xl"
               : "bg-white/[0.05] dark:bg-black/[0.05]"
           )}
         >
