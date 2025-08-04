@@ -13,10 +13,10 @@ export default function HomeHeroSection() {
         }}
         description="We build scalable, custom software solutions that drive innovation and growth. From SaaS platforms to enterprise applications, we deliver technology that transforms businesses."
         ctaText="Start Your Project"
-        ctaHref="/contact"
+        ctaHref="/auth"
         video={{
           src: "/hero.mp4",
-          poster: "/images/dashboard-light.png",
+          poster: "/placeholder.jpg",
         }}
         gridOptions={{
           angle: 65,

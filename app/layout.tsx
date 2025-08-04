@@ -1,60 +1,67 @@
-import Provider from "@/app/provider";
-import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@/components/ui/sonner";
-import { ClerkProvider } from "@clerk/nextjs";
-import { Analytics } from "@vercel/analytics/react";
-import { IBM_Plex_Mono, Inter, Manrope } from "next/font/google";
 import type { Metadata } from "next";
+import { Manrope } from "next/font/google";
 import "./globals.css";
-import { BackToTop } from "@/components/ui/back-to-top";
-import { Suspense } from 'react';
-import Loading from './loading';
+import { ThemeProvider } from "@/components/theme-provider";
+import { LoadingProvider } from "@/components/providers/LoadingProvider";
+import { RootLoader } from "@/components/ui/root-loader";
+import { Analytics } from "@vercel/analytics/react";
+import ErrorBoundary from "@/components/error-boundary";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nextstarter.xyz/"),
   title: {
-    default: 'Next Starter',
-    template: `%s | Next Starter`
+    default: "AffinityX - Modern Enterprise Application Platform",
+    template: "%s | AffinityX",
   },
-  description:
-    "The Ultimate Nextjs 15 Starter Kit for quickly building your SaaS, giving you time to focus on what really matters",
+  description: "A cutting-edge, enterprise-ready software services platform featuring stunning glass-morphism design, AI integration capabilities, and comprehensive modern web development tools.",
+  keywords: [
+    "enterprise software",
+    "web development",
+    "AI integration",
+    "glass-morphism design",
+    "modern web applications",
+    "software services",
+    "digital transformation",
+  ],
+  authors: [{ name: "Affinity Labs" }],
+  creator: "Affinity Labs",
+  publisher: "Affinity Labs",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://theaffinitylabs.com"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    description:
-      "The Ultimate Nextjs 15 Starter Kit for quickly building your SaaS, giving you time to focus on what really matters",
+    type: "website",
+    locale: "en_US",
+    url: "https://theaffinitylabs.com",
+    title: "AffinityX - Modern Enterprise Application Platform",
+    description: "A cutting-edge, enterprise-ready software services platform featuring stunning glass-morphism design, AI integration capabilities, and comprehensive modern web development tools.",
+    siteName: "AffinityX",
     images: [
-      "https://dwdwn8b5ye.ufs.sh/f/MD2AM9SEY8GucGJl7b5qyE7FjNDKYduLOG2QHWh3f5RgSi0c",
+      {
+        url: "https://theaffinitylabs.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "AffinityX - Modern Enterprise Application Platform",
+      },
     ],
-    url: "https://nextstarter.xyz/",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nextjs Starter Kit",
-    description:
-      "The Ultimate Nextjs 15 Starter Kit for quickly building your SaaS, giving you time to focus on what really matters",
-    siteId: "",
-    creator: "@rasmickyy",
-    creatorId: "",
-    images: [
-      "https://dwdwn8b5ye.ufs.sh/f/MD2AM9SEY8GucGJl7b5qyE7FjNDKYduLOG2QHWh3f5RgSi0c",
-    ],
+    title: "AffinityX - Modern Enterprise Application Platform",
+    description: "A cutting-edge, enterprise-ready software services platform featuring stunning glass-morphism design, AI integration capabilities, and comprehensive modern web development tools.",
+    images: ["https://theaffinitylabs.com/og-image.jpg"],
   },
 };
-
-const ibmPlexMono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-ibm-plex-mono',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-});
-
-const manrope = Manrope({
-  subsets: ['latin'],
-  variable: '--font-manrope',
-});
 
 export default function RootLayout({
   children,
@@ -62,35 +69,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider dynamic>
-      <html lang="en" suppressHydrationWarning>
-        <head>
-          <link
-            rel="preload"
-            href="/fonts/your-font.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
-        </head>
-        <body className={`${ibmPlexMono.variable} ${inter.variable} ${manrope.variable} font-sans`}>
-          <Provider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="dark"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <Suspense fallback={<Loading />}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${manrope.className} ${manrope.variable} gpu-accelerated bg-white dark:bg-black`}>
+        <ErrorBoundary>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <LoadingProvider>
+              <RootLoader>
                 {children}
-              </Suspense>
-              <Toaster />
-              <BackToTop />
-            </ThemeProvider>
-          </Provider>
-          <Analytics />
-        </body>
-      </html>
-    </ClerkProvider>
+              </RootLoader>
+            </LoadingProvider>
+            <Analytics />
+          </ThemeProvider>
+        </ErrorBoundary>
+      </body>
+    </html>
   );
 }

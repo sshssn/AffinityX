@@ -40,7 +40,7 @@ export default function SideBySide() {
               <div className="mb-6 w-fit rounded-full border border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-900/30 px-4 py-1">
                 <div className="flex items-center gap-2 text-sm font-medium text-blue-900 dark:text-blue-200">
                   <Sparkles className="h-4 w-4" />
-                  <span>Why Choose Next Starter</span>
+                  <span>Why Choose AffinityX</span>
                 </div>
               </div>
 
@@ -48,7 +48,7 @@ export default function SideBySide() {
                 A Faster Path to Production
               </h2>
               <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
-                Accelerate your development with our powerful Next.js starter kit. Focus on building features, not infrastructure.
+                Accelerate your development with our powerful AffinityX platform. Focus on building features, not infrastructure.
               </p>
               <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
                 {features.map((feature, index) => (

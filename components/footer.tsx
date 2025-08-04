@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export function Footer() {
   return (
     <footer className="relative py-20 overflow-hidden">
@@ -18,22 +20,65 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Solutions */}
           <div>
             <h3 className="font-heading text-lg font-semibold mb-6">Solutions</h3>
-            {/* Add footer links */}
+            <ul className="space-y-3">
+              <li>
+                <Link href="/client/dashboard" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                  Project Management
+                </Link>
+              </li>
+              <li>
+                <Link href="/client/tasks" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                  Task Management
+                </Link>
+              </li>
+              <li>
+                <Link href="/client/projects" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                  Project Portfolio
+                </Link>
+              </li>
+            </ul>
           </div>
 
           {/* Resources */}
           <div>
             <h3 className="font-heading text-lg font-semibold mb-6">Resources</h3>
-            {/* Add footer links */}
+            <ul className="space-y-3">
+              <li>
+                <Link href="/about" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                  Terms of Service
+                </Link>
+              </li>
+            </ul>
           </div>
 
           {/* Contact */}
           <div>
             <h3 className="font-heading text-lg font-semibold mb-6">Contact</h3>
-            {/* Add contact info */}
+            <ul className="space-y-3">
+              <li>
+                <a href="mailto:hello@theaffinitylabs.com" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                  hello@theaffinitylabs.com
+                </a>
+              </li>
+              <li>
+                <Link href="/auth" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                  Get Started
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

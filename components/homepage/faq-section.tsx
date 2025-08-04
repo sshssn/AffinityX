@@ -12,30 +12,34 @@ import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 const faqs = [
     {
-        question: "Build faster with TheAffinityLabs?",
-        answer: "Get up and running in no time with our enterprise-ready solutions and best practices. We handle the complexity so you can focus on your core business objectives."
+        question: "What is AffinityX and how does it help my business?",
+        answer: "AffinityX is our comprehensive project management platform designed to streamline your business operations. It combines project tracking, team collaboration, and analytics in one intuitive interface, helping you manage projects more efficiently, improve team productivity, and make data-driven decisions."
     },
     {
-        question: "How do we ensure scalability?",
-        answer: "Our solutions are built with scalability in mind from day one. With built-in optimizations and robust architecture, your systems will be ready to handle increased demands and complexity."
+        question: "How is AffinityX different from other project management tools?",
+        answer: "AffinityX stands out with its real-time collaboration features, advanced analytics, and seamless integration capabilities. Unlike generic tools, it's built specifically for modern businesses with features like live updates, intelligent task assignment, and comprehensive reporting that adapts to your workflow."
     },
     {
-        question: "What makes our approach different?",
-        answer: "We focus on business outcomes rather than just technical solutions. By understanding your unique challenges, we deliver tailored solutions that drive real value and innovation."
+        question: "What kind of support do you provide for AffinityX?",
+        answer: "We provide comprehensive support including onboarding assistance, training sessions, and 24/7 technical support. Our team ensures you get the most out of AffinityX with personalized guidance and continuous optimization based on your specific business needs."
     },
     {
-        question: "How do we support your growth?",
-        answer: "Through continuous optimization, proactive monitoring, and strategic planning, we ensure your systems evolve alongside your business needs, maintaining peak performance."
+        question: "Can AffinityX scale with my growing business?",
+        answer: "Absolutely! AffinityX is built with scalability in mind. Whether you're a startup or an enterprise, the platform grows with you. Features like customizable workflows, role-based access control, and advanced project templates ensure it adapts to your evolving business requirements."
     },
     {
-        question: "What technologies do we specialize in?",
-        answer: "We excel in cutting-edge technologies including AI/ML, cloud architecture, enterprise software development, and digital transformation solutions, always aligned with industry best practices."
+        question: "How secure is my data on AffinityX?",
+        answer: "Security is our top priority. AffinityX uses enterprise-grade encryption, secure cloud infrastructure, and follows industry best practices for data protection. We implement regular security audits, backup systems, and compliance measures to ensure your sensitive business data remains protected."
+    },
+    {
+        question: "What technologies power AffinityX?",
+        answer: "AffinityX is built with cutting-edge technologies including Next.js for fast web performance, React Native for mobile apps, Python for backend processing, AWS for scalable cloud infrastructure, and real-time databases for instant collaboration. This modern stack ensures reliability, speed, and future-proof scalability."
     }
 ];
 
 export function FAQSection() {
     return (
-        <section className="py-24 mb-32 relative overflow-hidden">
+        <section className="py-24 relative overflow-hidden">
             {/* Frosted glass container with gradient background */}
             <div className="absolute inset-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-100/30 via-blue-100/30 to-teal-100/30 dark:from-purple-900/30 dark:via-blue-900/30 dark:to-teal-900/30" />

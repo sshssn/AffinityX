@@ -10,10 +10,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { api } from "@/convex/_generated/api";
 import { cn } from "@/lib/utils";
-import { useUser } from "@clerk/nextjs";
-import { useAction, useQuery } from "convex/react";
+
 import { CheckCircle2, DollarSign } from "lucide-react";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
@@ -24,7 +22,7 @@ type PricingSwitchProps = {
 };
 
 type PricingCardProps = {
-  user: any;
+  user: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   isYearly?: boolean;
   title: string;
   monthlyPrice?: number;
@@ -90,25 +88,22 @@ const PricingCard = ({
 }: PricingCardProps) => {
   const router = useRouter();
 
-  const getProCheckoutUrl = useAction(api.subscriptions.getProOnboardingCheckoutUrl);
-  const subscriptionStatus = useQuery(api.subscriptions.getUserSubscriptionStatus);
-
-
-
   const handleCheckout = async (interval: "month" | "year") => {
     try {
-      const checkoutProUrl = await getProCheckoutUrl({
-        interval
-      });
-
-      if (checkoutProUrl) {
-        window.location.href = checkoutProUrl;
+      // For now, redirect to auth page
+      // In the future, this can be integrated with Stripe or other payment providers
+      if (!user) {
+        router.push("/auth");
+        return;
       }
+      
+      // Placeholder for payment integration
+      console.log(`Redirecting to checkout for ${interval} plan`);
+      alert(`Checkout for ${interval} plan - Payment integration coming soon!`);
     } catch (error) {
       console.error("Failed to get checkout URL:", error);
     }
   };
-
 
   return (
     <Card
@@ -179,7 +174,7 @@ const PricingCard = ({
         <Button
           onClick={() => {
             if (!user) {
-              router.push("/sign-in");
+              router.push("/auth");
               return;
             }
             handleCheckout("month")
@@ -200,7 +195,7 @@ export default function Pricing() {
   const [isYearly, setIsYearly] = useState<boolean>(false);
   const togglePricingPeriod = (value: string) =>
     setIsYearly(parseInt(value) === 1);
-  const { user } = useUser();
+  const user = null; // No authentication for now
 
   const plans = [
     {

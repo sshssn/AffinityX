@@ -1,3 +1,5 @@
+"use client";
+import { useEffect } from "react";
 import HeroSection from "@/components/homepage/hero-section";
 import { WhyChooseSection } from "@/components/homepage/why-choose-section";
 import { FAQSection } from "@/components/homepage/faq-section";
@@ -7,6 +9,16 @@ import { TechStackFlow } from "@/components/homepage/tech-stack-flow";
 import { OurServicesSection } from "@/components/homepage/our-services-section";
 
 export default function Home() {
+  useEffect(() => {
+    // Prevent auto-scrolling and ensure page starts at top
+    window.scrollTo(0, 0);
+    
+    // Prevent any scroll restoration
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
   return (
     <PageWrapper>
       <HeroSection />

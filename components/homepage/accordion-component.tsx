@@ -10,20 +10,28 @@ import { motion } from "motion/react"
 
 const faqs = [
     {
-        question: "Do I get access to this landing page in the starter kit?",
-        answer: "Yes, this page isn't even a real landing page more so a template for you to build on."
+        question: "What types of software development services do you offer?",
+        answer: "We offer comprehensive software development services including web development, mobile apps (iOS/Android), cloud solutions, DevOps & hosting, security services, and end-to-end SaaS platform development. Our team specializes in modern technologies like Next.js, React, and scalable cloud architectures."
     },
     {
-        question: "Is the starter kit regularly updated?",
-        answer: "Yes, we continuously update the starter kit with the latest features, security patches, and best practices to ensure you're always working with cutting-edge technology."
+        question: "How does the client management and billing system work?",
+        answer: "Our platform provides a complete client management system where you can track all your clients, manage billing cycles, generate invoices, and monitor project requests. Clients get their own portal to view invoices, submit feature requests, and track project progress in real-time."
     },
     {
-        question: "Can I use this for commercial projects?",
-        answer: "Absolutely! The starter kit comes with a commercial license, allowing you to use it in both personal and commercial projects without any restrictions."
+        question: "What is included in your cloud solutions and DevOps services?",
+        answer: "Our cloud solutions cover AWS, Azure, and GCP infrastructure setup with automated scaling, monitoring, and disaster recovery. DevOps services include CI/CD pipeline setup, container orchestration with Docker and Kubernetes, and managed hosting solutions for optimal performance and reliability."
     },
     {
-        question: "What kind of support do you provide?",
-        answer: "We offer comprehensive support through our Discord community, where you can get help from both our team and other developers using the starter kit."
+        question: "How do you handle project communication and feature requests?",
+        answer: "We provide a streamlined request management system where clients can submit feature requests and track their status. Our admin dashboard allows us to review, prioritize, and update request statuses. All communication is centralized and transparent for both parties."
+    },
+    {
+        question: "What security measures do you implement in your applications?",
+        answer: "We provide comprehensive security services including application security audits, penetration testing, and implementation of security best practices. All our applications follow OWASP guidelines, include proper authentication, and are built with security-first principles."
+    },
+    {
+        question: "Can you help with existing applications or only build new ones?",
+        answer: "We work with both new and existing applications. We can audit, refactor, and enhance existing codebases, migrate legacy systems to modern architectures, or build entirely new applications from scratch. Our team adapts to your specific needs and technical requirements."
     }
 ]
 
@@ -45,7 +53,7 @@ export function AccordionComponent() {
                         Frequently Asked Questions
                     </h2>
                     <p className="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
-                        Everything you need to know about the Next.js Starter Kit. Can&apos;t find the answer you&apos;re looking for? Reach out to our team.
+                        Everything you need to know about our software development services and platform. Can&apos;t find the answer you&apos;re looking for? Reach out to our team.
                     </p>
                 </div>
 

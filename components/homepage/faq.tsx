@@ -48,7 +48,7 @@ export function FAQ() {
                         Frequently Asked Questions
                     </h2>
                     <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                        Get answers to common questions about TheAffinityLabs' services and solutions. 
+                        Get answers to common questions about TheAffinityLabs&apos; services and solutions. 
                         Need more information? Contact our team for personalized assistance.
                     </p>
                 </motion.div>

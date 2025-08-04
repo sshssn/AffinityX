@@ -13,7 +13,7 @@ type SitemapEntry = {
 };
 
 export default async function sitemap(): Promise<SitemapEntry[]> {
-  const baseUrl = "https://nextstarter.xyz";
+  const baseUrl = "https://affinityx.com";
 
   const staticPages: SitemapEntry[] = [
     {

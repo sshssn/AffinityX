@@ -28,9 +28,10 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        heading: ['Manrope', 'sans-serif'],
+        sans: ['var(--font-manrope)', 'Manrope', 'sans-serif'],
+        heading: ['var(--font-manrope)', 'Manrope', 'sans-serif'],
         mono: ['IBM Plex Mono', 'monospace'],
+        geist: ['Geist', 'var(--font-manrope)', 'sans-serif'],
       },
       // Merging backgroundImage from the first file
       backgroundImage: {
@@ -87,6 +88,19 @@ const config: Config = {
           to: {
             backgroundPosition: "-200% 0",
           },
+        },
+        // Performance optimized keyframes
+        "fadeIn": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        "slideUp": {
+          "0%": { transform: "translateY(20px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        "scaleIn": {
+          "0%": { transform: "scale(0.95)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
         },
         "border-beam": {
           "100%": {
@@ -154,6 +168,10 @@ const config: Config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
         "background-shine": "background-shine 2s linear infinite",
+        // Performance optimized animations
+        "fade-in": "fadeIn 0.3s ease-out",
+        "slide-up": "slideUp 0.4s ease-out",
+        "scale-in": "scaleIn 0.2s ease-out",
       },
     },
   },

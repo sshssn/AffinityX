@@ -12,12 +12,12 @@ const flowSections = [
   },
   {
     title: "Authentication",
-    items: ["Clerk Auth", "JWT", "OAuth 2.0"],
+    items: ["Custom Auth", "JWT", "OAuth 2.0"],
     color: "from-purple-500/20 via-violet-400/20 to-fuchsia-300/20"
   },
   {
     title: "Backend",
-    items: ["Node.js", "Python", "Supabase"],
+    items: ["Node.js", "Python", "Convex"],
     color: "from-emerald-500/20 via-green-400/20 to-teal-300/20"
   },
   {

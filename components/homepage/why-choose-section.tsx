@@ -134,7 +134,7 @@ export function WhyChooseSection() {
             <BentoGridItem
               key={i}
               {...item}
-              color={item.color}
+              color="white"
               icon={
                 <div className="p-3 w-20 h-20 rounded-2xl bg-black/40 backdrop-blur-sm flex items-center justify-center relative overflow-hidden">
                   {/* RGB glow effect behind icon */}

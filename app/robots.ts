@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/dashboard/',
+      disallow: ['/admin/', '/client/'],
     },
-    sitemap: 'https://nextstarter.xyz/sitemap.xml',
+    sitemap: 'https://affinityx.com/sitemap.xml',
   }
 }
