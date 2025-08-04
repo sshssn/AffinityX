@@ -62,26 +62,23 @@ export async function GET(request: NextRequest) {
     NODE_ENV: process.env.NODE_ENV
   });
   
+  // Check if Auth0 is properly configured
+  const auth0Domain = process.env.AUTH0_DOMAIN;
+  const clientId = process.env.AUTH0_CLIENT_ID;
+  const baseUrl = process.env.AUTH0_BASE_URL;
+  
+  if (!auth0Domain || !clientId || !baseUrl) {
+    console.error('Missing Auth0 environment variables:', {
+      AUTH0_DOMAIN: auth0Domain,
+      AUTH0_CLIENT_ID: clientId,
+      AUTH0_BASE_URL: baseUrl
+    });
+    return NextResponse.redirect(`${baseUrl || 'http://localhost:3000'}/auth?error=configuration_error`);
+  }
+  
   // Login endpoint - redirect to Auth0 hosted login page
-  if (pathname === '/api/auth/login') {
+  if (pathname.endsWith('/login')) {
     const returnTo = searchParams.get('returnTo') || '/dashboard';
-    const auth0Domain = process.env.AUTH0_DOMAIN;
-    const clientId = process.env.AUTH0_CLIENT_ID;
-    const baseUrl = process.env.AUTH0_BASE_URL;
-    
-    // Check if environment variables are set
-    if (!auth0Domain || !clientId || !baseUrl) {
-      console.error('Missing Auth0 environment variables:', {
-        AUTH0_DOMAIN: auth0Domain,
-        AUTH0_CLIENT_ID: clientId,
-        AUTH0_BASE_URL: baseUrl
-      });
-      return NextResponse.json(
-        { error: 'Auth0 configuration is missing' },
-        { status: 500 }
-      );
-    }
-    
     const redirectUri = `${baseUrl}/api/auth/callback`;
     
     const authUrl = `https://${auth0Domain}/authorize?` +
@@ -96,17 +93,8 @@ export async function GET(request: NextRequest) {
   }
   
   // Logout endpoint - redirect to Auth0 logout
-  if (pathname === '/api/auth/logout') {
-    const auth0Domain = process.env.AUTH0_DOMAIN;
-    const clientId = process.env.AUTH0_CLIENT_ID;
-    const returnTo = process.env.AUTH0_BASE_URL || 'http://localhost:3000';
-    
-    if (!auth0Domain || !clientId) {
-      return NextResponse.json(
-        { error: 'Auth0 configuration is missing' },
-        { status: 500 }
-      );
-    }
+  if (pathname.endsWith('/logout')) {
+    const returnTo = baseUrl;
     
     const logoutUrl = `https://${auth0Domain}/v2/logout?` +
       `client_id=${clientId}&` +
@@ -123,24 +111,23 @@ export async function GET(request: NextRequest) {
   }
   
   // Callback endpoint - handle the authorization code exchange
-  if (pathname === '/api/auth/callback') {
+  if (pathname.endsWith('/callback')) {
     try {
       const code = searchParams.get('code');
       const state = searchParams.get('state');
-      // const error = new Error("Not implemented");
       
       // Check for error parameter in URL
       const errorParam = searchParams.get('error');
       if (errorParam) {
         console.error('Auth0 error:', errorParam);
-        return NextResponse.redirect(`${process.env.AUTH0_BASE_URL}/auth?error=${errorParam}`);
+        return NextResponse.redirect(`${baseUrl}/auth?error=${errorParam}`);
       }
       
       if (!code) {
-        return NextResponse.redirect(`${process.env.AUTH0_BASE_URL}/auth?error=no_code`);
+        return NextResponse.redirect(`${baseUrl}/auth?error=no_code`);
       }
       
-      const redirectUri = `${process.env.AUTH0_BASE_URL}/api/auth/callback`;
+      const redirectUri = `${baseUrl}/api/auth/callback`;
       
       // Exchange code for tokens
       const tokenResponse = await exchangeCodeForTokens(code, redirectUri);
@@ -148,7 +135,7 @@ export async function GET(request: NextRequest) {
       
       if (!access_token) {
         console.error('No access token received from Auth0');
-        return NextResponse.redirect(`${process.env.AUTH0_BASE_URL}/auth?error=no_access_token`);
+        return NextResponse.redirect(`${baseUrl}/auth?error=no_access_token`);
       }
       
       // Get user profile
@@ -156,7 +143,7 @@ export async function GET(request: NextRequest) {
       
       if (!userProfile || !userProfile.email) {
         console.error('Invalid user profile received from Auth0');
-        return NextResponse.redirect(`${process.env.AUTH0_BASE_URL}/auth?error=invalid_profile`);
+        return NextResponse.redirect(`${baseUrl}/auth?error=invalid_profile`);
       }
       
       // Store session data in secure cookie
@@ -181,7 +168,7 @@ export async function GET(request: NextRequest) {
       
       console.log('Redirecting to:', redirectUrl);
       
-      const response = NextResponse.redirect(`${process.env.AUTH0_BASE_URL}${redirectUrl}`);
+      const response = NextResponse.redirect(`${baseUrl}${redirectUrl}`);
       
       // Set session cookie with proper error handling
       try {
@@ -202,7 +189,7 @@ export async function GET(request: NextRequest) {
       
     } catch (error) {
       console.error('Auth0 callback error:', error);
-      return NextResponse.redirect(`${process.env.AUTH0_BASE_URL}/auth?error=callback_error`);
+      return NextResponse.redirect(`${baseUrl}/auth?error=callback_error`);
     }
   }
   
@@ -213,7 +200,7 @@ export async function POST(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
   // Logout endpoint - handle POST requests for logout
-  if (pathname === '/api/auth/logout') {
+  if (pathname.endsWith('/logout')) {
     const auth0Domain = process.env.AUTH0_DOMAIN;
     const clientId = process.env.AUTH0_CLIENT_ID;
     const returnTo = process.env.AUTH0_BASE_URL || 'http://localhost:3000';

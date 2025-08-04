@@ -73,7 +73,7 @@ export default function NavBar() {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isAIChatModalOpen, setIsAIChatModalOpen] = React.useState(false);
-  const { theme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
   const { user, loading, isAuthenticated } = useAuth();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -85,13 +85,17 @@ export default function NavBar() {
     return navigationItems.filter(item => item.public || isAuthenticated);
   };
 
-  // Logo component with theme awareness
+  // Logo component with improved theme awareness
   const LogoComponent = () => {
     const [mounted, setMounted] = React.useState(false);
 
     React.useEffect(() => {
       setMounted(true);
     }, []);
+
+    // Use resolvedTheme for more reliable theme detection
+    const currentTheme = mounted ? resolvedTheme : 'light';
+    const logoSrc = currentTheme === 'dark' ? '/dark.png' : '/light.png';
 
     // Prevent hydration mismatch by not rendering until client-side
     if (!mounted) {
@@ -105,11 +109,12 @@ export default function NavBar() {
     return (
       <div className="relative w-32 h-8">
         <Image
-          src={theme === 'dark' ? '/dark.png' : '/light.png'}
+          src={logoSrc}
           alt="Affinity Labs Logo"
           fill
-          className="object-contain"
-          priority // This ensures the logo loads first
+          className="object-contain transition-opacity duration-200"
+          priority
+          key={currentTheme} // Force re-render when theme changes
         />
       </div>
     );
