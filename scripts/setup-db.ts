@@ -47,11 +47,11 @@ async function main() {
 
     for (const userData of sampleUsers) {
       try {
-        await db.execute(sql`
+        await sql`
           INSERT INTO users (auth0_id, email, name, role, avatar_url)
           VALUES (${userData.auth0_id}, ${userData.email}, ${userData.name}, ${userData.role}, ${userData.avatar_url})
           ON CONFLICT (auth0_id) DO NOTHING
-        `);
+        `;
       } catch (error) {
         console.log(`User ${userData.email} already exists or error:`, error);
       }
@@ -96,10 +96,10 @@ async function main() {
 
     for (const projectData of sampleProjects) {
       try {
-        await db.execute(sql`
+        await sql`
           INSERT INTO projects (title, description, status, client_id, admin_id, start_date, end_date, budget, progress)
           VALUES (${projectData.title}, ${projectData.description}, ${projectData.status}, ${projectData.client_id}, ${projectData.admin_id}, ${projectData.start_date}, ${projectData.end_date}, ${projectData.budget}, ${projectData.progress})
-        `);
+        `;
       } catch (error) {
         console.log(`Project ${projectData.title} already exists or error:`, error);
       }
@@ -147,10 +147,10 @@ async function main() {
 
     for (const taskData of sampleTasks) {
       try {
-        await db.execute(sql`
+        await sql`
           INSERT INTO tasks (title, description, project_id, assigned_to, assigned_by, priority, status, due_date, estimated_hours, actual_hours)
           VALUES (${taskData.title}, ${taskData.description}, ${taskData.project_id}, ${taskData.assigned_to}, ${taskData.assigned_by}, ${taskData.priority}, ${taskData.status}, ${taskData.due_date}, ${taskData.estimated_hours}, ${taskData.actual_hours})
-        `);
+        `;
       } catch (error) {
         console.log(`Task ${taskData.title} already exists or error:`, error);
       }
